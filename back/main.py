@@ -25,7 +25,7 @@ def get_predict(data: dict):
 		zip(
 			['Time', 'Temperature', 'Uvx', 'Uvy', 'Uvz', 'Collision', 'Gas'],
 			[
-				[data['time']], [data['temperature']], [data['Ux']], [data['Uy']], [data['Uz'], [0], [0]]
+				[float(data['time'])], [float(data['temperature'])], [float(data['Ux'])], [float(data['Uy'])], [float(data['Uz'])], [0], [0]
 			]
 		)
 	)
@@ -33,8 +33,10 @@ def get_predict(data: dict):
 	answer = MODEL.predict(array)
 
 	# Векторы a и b
-	a = np.array([data['Ux'], data['Uy'], data['Uz']])
+	a = np.array([float(data['Ux']), float(data['Uy']), float(data['Uz'])])
 	b = np.array(answer[0])
+
+	print(a, b)
 
 	# Временной массив
 	t = np.linspace(0, 1, 40)
@@ -71,7 +73,7 @@ def get_predict(data: dict):
 		ax.set_ylim3d([-10, 10])
 		ax.set_zlim3d([-10, 10])
 
-		ax.set_title('Vector Animation\nTime = ' + str(np.round(t[num], decimals=2)) + ' sec')
+		ax.set_title('Vector Animation')
 		ax.set_xlabel('X')
 		ax.set_ylabel('Y')
 		ax.set_zlabel('Z')

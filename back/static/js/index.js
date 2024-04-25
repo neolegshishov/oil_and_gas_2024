@@ -14,8 +14,8 @@ function predict() {
         };
         function send_data() {
           fetch('/predict', {method: 'POST', body: JSON.stringify(data)})
-            .then(response => response.json())
-            .then(respJson => {
+            .then(response => response.blob())
+            .then(imageBlob => {
               // Создаем URL для blob-объекта
               const imageObjectURL = URL.createObjectURL(imageBlob);
               // Вставляем изображение в div
